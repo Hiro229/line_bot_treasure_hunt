@@ -18,6 +18,7 @@
 
 require_once('./LINEBotTiny.php');
 require_once('line_bot_token.php');
+
 // 上野公園
 //$park_lat = 35.71471094494001;
 //$park_lon = 139.77328686105244;
@@ -36,14 +37,15 @@ $lon3 = 139.77345964991682;
 $lat4 = 35.716787442702866;
 $lon4 = 139.7765349188909;
 // トーテムポール
-$lat5 = 35.7147076694801; 
+$lat5 = 35.7147076694801;
 $lon5 = 139.7732873474706;
-//西郷さん	
-$lat6 = 35.71185308828583; 
-$lon6= 139.77414985804634;
+//西郷さん
+$lat6 = 35.71185308828583;
+$lon6 = 139.77414985804634;
 //ゴール
-$lat_goal = 35.711917560754934; 
+$lat_goal = 35.711917560754934;
 $lon_goal = 139.77427845240496;
+
 // 目的地までの直線距離
 require_once('distance.php');
 
@@ -93,7 +95,7 @@ foreach ($client->parseEvents() as $event) {
 						]
 					]
 				]);
-			} elseif ($message['text'] ===  '小松宮彰仁親王像だね！') {
+			} elseif ($message['text'] === '小松宮彰仁親王像だね！') {
 				$client->replyMessage([
 					'replyToken' => $event['replyToken'],
 					'messages' => [
@@ -103,7 +105,7 @@ foreach ($client->parseEvents() as $event) {
 						],
 					]
 				]);
-			} elseif ($message['text'] ===  'カエルの噴水だね！') {
+			} elseif ($message['text'] === 'カエルの噴水だね！') {
 				$client->replyMessage([
 					'replyToken' => $event['replyToken'],
 					'messages' => [
@@ -113,7 +115,7 @@ foreach ($client->parseEvents() as $event) {
 						],
 					]
 				]);
-			} elseif ($message['text'] ===  'ボート場だね！') {
+			} elseif ($message['text'] === 'ボート場だね！') {
 				$client->replyMessage([
 					'replyToken' => $event['replyToken'],
 					'messages' => [
@@ -123,7 +125,7 @@ foreach ($client->parseEvents() as $event) {
 						],
 					]
 				]);
-			} elseif ($message['text'] ===  'シロナガスクジラだね！') {
+			} elseif ($message['text'] === 'シロナガスクジラだね！') {
 				$client->replyMessage([
 					'replyToken' => $event['replyToken'],
 					'messages' => [
@@ -133,19 +135,19 @@ foreach ($client->parseEvents() as $event) {
 						],
 					]
 				]);
-			} 
+			}
 			break;
 		case 'location':
-
 			// 公園までの距離
 			$park_distance = distance($message['latitude'], $message['longitude'], $park_lat, $park_lon, false);
 			$park_duration = directions($message['latitude'], $message['longitude'], $park_lat, $park_lon);
+
 			// 西郷さんまでの距離
 			$saigo_distance = distance($message['latitude'], $message['longitude'], $lat6, $lon6, false);
 			$totem_distance = distance($message['latitude'], $message['longitude'], $lat5, $lon5, false);
 
 			// 西郷さん15m以内
-			if ($saigo_distance <= 15) { 
+			if ($saigo_distance <= 15) {
 				$goal_distance = distance($message['latitude'], $message['longitude'], $lat_goal, $lon_goal, false);
 				if ($goal_distance > 1) {
 					$client->replyMessage([
@@ -158,42 +160,6 @@ foreach ($client->parseEvents() as $event) {
 							[
 								'type' => 'text',
 								'text' => 'お宝までの距離は ' . $goal_distance. ' m だよ'
-							],
-							[
-								'type' => 'imagemap',
-								'baseUrl' => 'https://mydestinyscalling.mydns.jp/line_bot/lets_treasure_hunt/point/',
-								'altText' => 'Treasure map',
-								'baseSize' => [
-									'width' => 1040,
-									'height' => 1040,
-								],
-								'actions' => [
-									[
-										'type' => 'uri',
-										'label' => 'treasuremap',
-										'linkUri' => 'https://goo.gl/maps/hwJnLAe5zteEUKEdA',
-										'area' => [
-											'x' => 0,
-											'y' => 0,
-											'width' => 520,
-											'height' => 1040,
-
-										]
-									],
-									[
-										'type' => 'message',
-										'label' => 'Treasure Map',
-										'text' => 'Treasure Map',
-										'area' => [
-											'x' => 520,
-											'y' => 0,
-											'width' => 520,
-											'height' => 1040,
-
-										]
-									]
-
-								]
 							],
 						]
 					]);
@@ -215,7 +181,7 @@ foreach ($client->parseEvents() as $event) {
 				}
 			}
 			// totem pole 15m以内
-			if ($totem_distance <= 15) { 
+			if ($totem_distance <= 15) {
 				$client->replyMessage([
 					'replyToken' => $event['replyToken'],
 					'messages' => [
@@ -380,7 +346,6 @@ foreach ($client->parseEvents() as $event) {
 										'y' => 456,
 										'width' => 77,
 										'height' => 74,
-
 									]
 								],
 								[
@@ -392,7 +357,6 @@ foreach ($client->parseEvents() as $event) {
 										'y' => 872,
 										'width' => 69,
 										'height' => 72,
-
 									]
 								],
 								[
@@ -404,7 +368,6 @@ foreach ($client->parseEvents() as $event) {
 										'y' => 741,
 										'width' => 71,
 										'height' => 70,
-
 									]
 								],
 								[
@@ -416,7 +379,6 @@ foreach ($client->parseEvents() as $event) {
 										'y' => 382,
 										'width' => 60,
 										'height' => 73,
-
 									]
 								],
 								[
@@ -428,7 +390,6 @@ foreach ($client->parseEvents() as $event) {
 										'y' => 217,
 										'width' => 70,
 										'height' => 76,
-
 									]
 								],
 							]
